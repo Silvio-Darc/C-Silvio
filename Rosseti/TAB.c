@@ -68,3 +68,73 @@ void TAB_libera(TAB *a){
     free(a);
   }
 }
+
+TAB* TAB_copia(TAB* a) {
+  if (a) {
+    TAB* nova_arvore = TAB_cria(a->info,NULL,NULL);
+    nova_arvore->esq = TAB_copia(a->esq);
+    nova_arvore->dir = TAB_copia(a->dir);
+    return nova_arvore;
+  }
+  return NULL;
+}
+
+TAB* TAB_espelho(TAB* a) {
+  if (a) {
+    TAB* nova_arvore = TAB_cria(a->info,NULL,NULL);
+    nova_arvore->esq = TAB_espelho(a->dir);
+    nova_arvore->dir = TAB_espelho(a->esq);
+    return nova_arvore;
+  }
+  return NULL;
+}
+
+TAB* TAB_maior(TAB* a) {
+  if (a) {
+    TAB* maior = a;
+    TAB* esq_maior = TAB_maior(a->esq);
+    TAB* dir_maior = TAB_maior(a->dir);
+    if (esq_maior != NULL && esq_maior->info > maior->info) {
+      maior = esq_maior;
+    }
+    if (dir_maior != NULL && dir_maior->info > maior->info) {
+      maior = dir_maior;
+    }
+    return maior;
+  }
+  return NULL;
+}
+
+TAB* TAB_menor(TAB* a) {
+  if (a) {
+    TAB* menor = a;
+    TAB* esq_menor = TAB_menor(a->esq);
+    TAB* dir_menor = TAB_menor(a->dir);
+    if (esq_menor != NULL && esq_menor->info < menor->info) {
+      menor = esq_menor;
+    }
+    if (dir_menor != NULL && dir_menor->info < menor->info) {
+      menor = dir_menor;
+    }
+    return menor;
+  }
+  return NULL;
+}
+
+int igual(TAB* a1, TAB* a2) {
+  if (a1 == NULL && a2 == NULL){return 1;}
+  if (a1 == NULL || a2 == NULL){return 0;}
+  if (a1->info != a2->info){return 0;}
+  return igual(a1->esq, a2->esq) && igual(a1->dir, a2->dir);
+}
+
+TAB* retira_pares (TAB* arv) {
+  if (arv) {
+    retira_pares(arv->esq);
+    retira_pares(arv->dir);
+    if (arv->info % 2 == 0) {
+
+    }
+    return arv
+  }
+}

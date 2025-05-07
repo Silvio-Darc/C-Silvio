@@ -17,3 +17,12 @@ void TAB_imp_ident(TAB *a);
 void TAB_libera(TAB *a);
 
 TAB *TAB_busca(TAB *a, int elem);
+
+///////////////////////////////////////
+
+TAB* TAB_copia(TAB* a);
+TAB* TAB_espelho(TAB* a);
+TAB* TAB_maior(TAB* a);
+TAB* TAB_menor(TAB* a);
+int igual(TAB* a1, TAB* a2);
+TAB* retira_pares (TAB* arv);
