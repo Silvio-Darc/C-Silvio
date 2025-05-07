@@ -1,0 +1,3 @@
+/home/silviodarc/CLionProjects/C-Silvio/cmake-build-debug/CMakeFiles/C_Silvio.dir
+/home/silviodarc/CLionProjects/C-Silvio/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/silviodarc/CLionProjects/C-Silvio/cmake-build-debug/CMakeFiles/rebuild_cache.dir
