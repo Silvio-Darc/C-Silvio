@@ -9,6 +9,7 @@ TAB *TAB_cria(int raiz, TAB *esq, TAB *dir){
   novo->info = raiz;
   novo->esq = esq;
   novo->dir = dir;
+  novo->cor = 0;
   return novo;
 }
 
@@ -17,6 +18,19 @@ TAB *TAB_busca(TAB *a, int elem){
   TAB *resp = TAB_busca(a->esq, elem);
   if(resp) return resp;
   return TAB_busca(a->dir, elem);
+}
+
+TAB* TAB_achafolha(TAB *a) {
+  if (!a) return NULL;
+
+  if (!a->esq && !a->dir) {
+    return a;
+  }
+
+  TAB *folha_esq = TAB_achafolha(a->esq);
+  if (folha_esq) return folha_esq;
+
+  return TAB_achafolha(a->dir);
 }
 
 void TAB_imp_pre(TAB *a){
@@ -48,7 +62,7 @@ void imp_aux(TAB *a, int andar){
   if(a){
     imp_aux(a->dir, andar + 1);
     for(j = 0; j <= andar; j++) printf("\t"); //printf("   ");
-    printf("%d\n", a->info);
+    printf("%d %d\n", a->info, a->cor);
     imp_aux(a->esq, andar + 1);
   }
   else{
@@ -130,11 +144,67 @@ int igual(TAB* a1, TAB* a2) {
 
 TAB* retira_pares (TAB* arv) {
   if (arv) {
-    retira_pares(arv->esq);
-    retira_pares(arv->dir);
-    if (arv->info % 2 == 0) {
+    arv->esq = retira_pares(arv->esq);
+    arv->dir = retira_pares(arv->dir);
 
+    if (arv->info % 2 == 0) {
+      //Nó atual é par
+      TAB* temp;
+      if (!arv->esq) {
+        temp = arv->dir;
+      }
+      else if (!arv->dir) {
+        temp = arv->esq;
+      }
+      else {
+        //Nó com dois filhos
+        TAB* aux = arv->esq;
+        while (aux->dir) aux = aux->dir;
+        aux->dir = arv->dir;
+        temp = arv->esq;
+      }
+      free(arv);
+      return temp;
     }
-    return arv
+    return arv;
   }
+}
+
+void colore (TAB* arv) {
+  if (arv) {
+    if (arv->cor == 0) {
+      if (arv->esq) {
+        arv->esq->cor = 1;
+        colore(arv->esq);
+      }
+      if (arv->dir) {
+        arv->dir->cor = 1;
+        colore(arv->dir);
+      }
+    }
+  }
+}
+
+int ni(TAB *a) {
+  int sum = 0;
+  if (a->esq) {
+    sum += ni(a->esq);
+  }
+  if (a->dir) {
+    sum += ni(a->dir);
+  }
+  if (a->esq || a->dir) sum++;
+  return sum;
+}
+
+int nf(TAB *a) {
+  int sum = 0;
+  if (a->esq) {
+    sum += nf(a->esq);
+  }
+  if (a->dir) {
+    sum += nf(a->dir);
+  }
+  if (!a->esq && !a->dir) sum++;
+  return sum;
 }

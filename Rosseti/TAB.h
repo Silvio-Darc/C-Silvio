@@ -4,6 +4,7 @@
 typedef struct arvbin{
   int info;
   struct arvbin *esq, *dir;
+  int cor;
 }TAB;
 
 TAB *TAB_inicializa(void);
@@ -26,3 +27,6 @@ TAB* TAB_maior(TAB* a);
 TAB* TAB_menor(TAB* a);
 int igual(TAB* a1, TAB* a2);
 TAB* retira_pares (TAB* arv);
+void colore (TAB* arv);
+int ni(TAB *a);
+int nf(TAB *a);

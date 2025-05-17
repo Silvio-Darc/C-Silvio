@@ -19,7 +19,7 @@ int main(){
     arvore2->dir->dir = TAB_cria(32, NULL, NULL);
 
     TAB_imp_ident(arvore);
-    puts("");
-    printf("%d", igual(arvore, arvore2));
+    puts("//////////////////////////////////////////////////////////////////////////////////////");
+    printf("%d", nf(arvore));
     return 0;
 }
