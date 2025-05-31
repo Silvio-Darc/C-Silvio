@@ -57,13 +57,13 @@ void TAB_imp_sim(TAB *a){
   }
 }
 
-void imp_aux(TAB *a, int andar){
+void TAB_imp_aux(TAB *a, int andar){
   int j;
   if(a){
-    imp_aux(a->dir, andar + 1);
+    TAB_imp_aux(a->dir, andar + 1);
     for(j = 0; j <= andar; j++) printf("\t"); //printf("   ");
     printf("%d %d\n", a->info, a->cor);
-    imp_aux(a->esq, andar + 1);
+    TAB_imp_aux(a->esq, andar + 1);
   }
   else{
    for(j = 0; j <= andar; j++) printf("\t");
@@ -72,7 +72,7 @@ void imp_aux(TAB *a, int andar){
 }
 
 void TAB_imp_ident(TAB *a){
-  imp_aux(a, 0);
+  TAB_imp_aux(a, 0);
 }
 
 void TAB_libera(TAB *a){
