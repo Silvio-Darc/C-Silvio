@@ -20,11 +20,3 @@ TABB *TABB_busca(TABB *a, int elem);
 
 TABB *TABB_insere(TABB *a, int elem);
 TABB *TABB_retira(TABB *a, int info);
-
-int qtd_nos(TABB* a);
-
-TABB* maior(TABB* a);
-TABB* menor(TABB* b);
-TABB* retira_impares(TABB* a);
-int* mN(TABB* a, int N);
-
