@@ -3,8 +3,17 @@
 #include "TLSE.h"
 
 //Q4 - 2,0 PONTOS
-//int mesmos_elementos (TAB* a1, TAB* a2){
-//}
+int compara_arv(TAB* a1, TAB* a2){
+  if (!a1) return 1;
+  if (!TAB_busca(a2, a1->info)) return 0;
+  return compara_arv(a1->esq, a2) && compara_arv(a1->dir, a2);
+}
+
+int mesmos_elementos (TAB* a1, TAB* a2){
+  if(!a1 && !a2) return 1;
+  if(!a1 || !a2) return 0;
+  return compara_arv(a1, a2) && compara_arv(a2, a1);
+}
 
 int main(void){
   int no, pai;
@@ -52,7 +61,7 @@ int main(void){
   TAB_imp_ident(a2);
   printf("\n");
  
-  //printf("%d\n", mesmos_elementos (a1, a2));
+  printf("%d\n", mesmos_elementos (a1, a2));
   
   TAB_libera(a1);
   TAB_libera(a2);
